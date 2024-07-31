@@ -23,3 +23,5 @@ logs
 
 # Змінні середовища 
 .env*
+# Local Netlify folder
+.netlify
