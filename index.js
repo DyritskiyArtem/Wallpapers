@@ -39,6 +39,8 @@ app.get("/", (req, res) => {
         <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#faebd6">
         <meta name="msapplication-TileColor" content="#faebd6">
         <meta name="theme-color" content="#faebd6">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     </head>
     <body>
         <header>
@@ -86,6 +88,8 @@ app.get("/", (req, res) => {
     </body>
     </html>`;
 
+    console.log(__dirname);
+
   res.send(html);
 });
 
@@ -119,6 +123,8 @@ app.get("/collection1", (req, res) => {
         <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#faebd6">
         <meta name="msapplication-TileColor" content="#faebd6">
         <meta name="theme-color" content="#faebd6">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     </head>
     <body>
 
@@ -165,6 +171,8 @@ app.get("/collection2", (req, res) => {
         <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#faebd6">
         <meta name="msapplication-TileColor" content="#faebd6">
         <meta name="theme-color" content="#faebd6">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     </head>
     <body>
 
