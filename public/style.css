@@ -10,12 +10,14 @@ header {
     position: sticky;
     top: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     background-color: antiquewhite;
     padding: 10px;
     z-index: 1000;
 }
+
+.header2{justify-content: space-between;}
 
 header h1 {
     color: #5C4033;
@@ -38,6 +40,30 @@ header a {
 }
 
 header a:hover { color: #c8886a; }
+
+.container {
+    font-size: 24px;
+    margin: 25px;
+    width: 95%;
+    height: 200px;
+    position: relative;
+  }
+
+.container p{
+    text-align: center;
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #5b3f2f;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    align-items: center;
+    font-size: 40px;
+}
 
 .gallery {
     display: flex;
@@ -95,7 +121,17 @@ input{
     margin-right: 10px;
 }
 
-button {
+input[type="file"]::file-selector-button{
+    background-color: #a0705a;
+    color: #fff;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button{
     background-color: #5C4033;
     color: #fff;
     border: none;
@@ -105,9 +141,8 @@ button {
     transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #c8886a;
-}
+button:hover,
+input[type="file"]::file-selector-button:hover{background-color: #c8886a;}
 
 @media (max-width: 768px) {
     header nav {

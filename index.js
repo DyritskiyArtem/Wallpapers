@@ -3,8 +3,7 @@ const multer = require("multer");
 const fs = require("fs");
 const path = require("path"); // Додано імпорт 'path'
 
-const collectionLinks1 = require("./collectionLinks1.json");
-const collectionLinks2 = require("./collectionLinks2.json");
+let photoLinks = require("./photoLinks.json");
 
 const app = express();
 app.use(express.static("public"));
@@ -29,7 +28,7 @@ app.get("/", (req, res) => {
   let html = `
     <html>
     <head>
-        <title>All Collections</title>
+        <title>Wallpapers</title>
         <link rel="stylesheet" href="./style.css">
 
         <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
@@ -44,13 +43,7 @@ app.get("/", (req, res) => {
     </head>
     <body>
         <header>
-            <h1>All collections</h1>
-            <nav>
-                <ul>
-                    <li><a href='/collection1'>Collection 1</a></li>
-                    <li><a href='/collection2'>Collection 2</a></li>
-                </ul>
-            </nav>
+            <h1>Wallpapers Dyritskiy</h1>
         </header>
 
         <form method='POST' action='/' enctype='multipart/form-data'>
@@ -60,30 +53,17 @@ app.get("/", (req, res) => {
         `;
 
   html += `<div class="gallery">`;
-  for (let i = 0; i < collectionLinks1.length; i++) {
-    const collectionLink1 = collectionLinks1[i];
+  for (let i = 0; i < photoLinks.length; i++) {
+    const photoLink = photoLinks[i];
 
     html += `
       <div class="gallery-item">
-        <img src="${collectionLink1}" alt="Uploaded image">
-        <p>${collectionLink1}</p>
-        <a href='${collectionLink1}' download>Download</a>
+        <img src="${photoLink}" alt="Uploaded image">
+        <p>${photoLink}</p>
+        <a href='${photoLink}' download>Download</a>
       </div>`
   }
 
-  html += `</div>`;
-  html += `<div class="gallery">`;
-
-  for (let i = 0; i < collectionLinks2.length; i++) {
-    const collectionLink2 = collectionLinks2[i];
-
-   html += `
-    <div class="gallery-item">
-      <img src="${collectionLink2}" alt="Uploaded image">
-      <p>${collectionLink2}</p>
-      <a href='${collectionLink2}' download>Download</a>
-    </div>`;
-  }
   html += `</div> 
     </body>
     </html>`;
@@ -94,114 +74,47 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", upload.single("file"), (req, res) => {
+    let html = `
+    <html>
+    <head>
+        <title>Wallpapers</title>
+        <link rel="stylesheet" href="./style.css">
+
+        <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+        <link rel="manifest" href="favicons/site.webmanifest">
+        <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#faebd6">
+        <meta name="msapplication-TileColor" content="#faebd6">
+        <meta name="theme-color" content="#faebd6">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    </head>
+    <body>
+        <header class='header2'>
+            <h1>Wallpapers Dyritskiy</h1>
+            <nav>
+                <ul>
+                    <li><a href='/'>Back</a></li>
+                </ul>
+            </nav>
+        </header>
+    `;
   if (req.file === undefined) {
-    let html = "Файл не вказано";
+    html += "<div class='container'><p>The file is not specified</p></div>";
     res.send(html);
   }
   else{
-    let html = "Ваша картинка завантажена";
+    html += "<div class='container'><p>Your image has been uploaded</p></div>";
     res.send(html);
   }
 
+  html += `</div> 
+  </body>
+  </html>`;
+
   let link = "uploads/" + req.file.filename;
-  collectionLinks1.push(link);
-});
-
-app.get("/collection1", (req, res) => {
-  res.setHeader("Content-Type", "text/html; charset=utf-8");
-
-  let html = `
-    <html>
-    <head>
-        <title>Collections 1</title>
-        <link rel="stylesheet" href="./style.css">
-
-        <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
-        <link rel="manifest" href="favicons/site.webmanifest">
-        <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#faebd6">
-        <meta name="msapplication-TileColor" content="#faebd6">
-        <meta name="theme-color" content="#faebd6">
-
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    </head>
-    <body>
-
-    <header>
-        <h1>Collection 1</h1> <br>
-        <nav>
-            <ul>
-                <li><a href='/'>Back</a></li>
-            </ul>
-        </nav>
-    </header>`;
-    html += `<div class="gallery">`;
-
-    for (let i = 0; i < collectionLinks1.length; i++) {
-      const collectionLink1 = collectionLinks1[i];
-  
-     html += `
-      <div class="gallery-item">
-        <img src="${collectionLink1}" alt="Uploaded image">
-        <p>${collectionLink1}</p>
-        <a href='${collectionLink1}' download>Download</a>
-      </div>`;
-    }
-    html += `</div>
-    </body>
-    </html>`;
-
-  res.send(html);
-});
-
-app.get("/collection2", (req, res) => {
-  res.setHeader("Content-Type", "text/html; charset=utf-8");
-
-  let html = `
-    <html>
-    <head>
-        <title>Collections 2</title>
-        <link rel="stylesheet" href="./style.css">
-
-        <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
-        <link rel="manifest" href="favicons/site.webmanifest">
-        <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#faebd6">
-        <meta name="msapplication-TileColor" content="#faebd6">
-        <meta name="theme-color" content="#faebd6">
-
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    </head>
-    <body>
-
-    <header>
-        <h1>Collection 2</h1> <br>
-        <nav>
-            <ul>
-            <li><a href='/'>Back</a></li>
-            </ul>
-        </nav>
-    </header>`;
-
-    html += `<div class="gallery">`;
-
-    for (let i = 0; i < collectionLinks2.length; i++) {
-      const collectionLink2 = collectionLinks2[i];
-  
-     html += `
-      <div class="gallery-item">
-        <img src="${collectionLink2}" alt="Uploaded image">
-        <p>${collectionLink2}</p>
-        <a href='${collectionLink2}' download>Download</a>
-      </div>`;
-    }
-    html += `</div> 
-    </body>
-    </html>`;
-
-  res.send(html);
+  photoLinks.push(link);
 });
 
 app.listen(port, () => {
