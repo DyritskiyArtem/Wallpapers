@@ -1,7 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const fs = require("fs");
-const path = require("path"); // Додано імпорт 'path'
+const path = require("path");
 
 let photoLinks = require("./photoLinks.json");
 
@@ -48,6 +48,15 @@ app.get("/", (req, res) => {
 
         <form method='POST' action='/' enctype='multipart/form-data'>
             <input name='file' type='file' accept="image/*">
+
+            <div class='divInput'>
+              <label>Name photo</label>          
+              <input name='name' type='text'>  
+              
+              <label>Tag</label>            
+              <input name='tag' type='text'/>
+            </div>
+
             <button type='submit'>Add photo</button>
         </form>
         `;
@@ -58,9 +67,10 @@ app.get("/", (req, res) => {
 
     html += `
       <div class="gallery-item">
-        <img src="${photoLink}" alt="Uploaded image">
-        <p>${photoLink}</p>
-        <a href='${photoLink}' download>Download</a>
+        <img src="${photoLink.img}" alt="Uploaded image">
+        <p>${photoLink.name}</p>
+        <p>${photoLink.tag}</p>
+        <a href='${photoLink.img}' download>Download</a>
       </div>`
   }
 
@@ -74,7 +84,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", upload.single("file"), (req, res) => {
-    let html = `
+  let html = `
     <html>
     <head>
         <title>Wallpapers</title>
@@ -100,21 +110,30 @@ app.post("/", upload.single("file"), (req, res) => {
             </nav>
         </header>
     `;
+  
   if (req.file === undefined) {
     html += "<div class='container'><p>The file is not specified</p></div>";
-    res.send(html);
-  }
-  else{
-    html += "<div class='container'><p>Your image has been uploaded</p></div>";
-    res.send(html);
+    res.status(400).send(html);
+    return;
   }
 
-  html += `</div> 
+  let { name, tag } = req.body;
+
+  if (name.length < 3 || name.length > 25) {
+    html += "<div class='container'><p>Name must be between 3 and 25 characters long.</p></div>";
+    res.status(400).send(html);
+    return;
+  }
+
+  html += `
+      <div class='container'><p>Your image has been uploaded</p></div>
+    </div> 
   </body>
   </html>`;
 
-  let link = "uploads/" + req.file.filename;
-  photoLinks.push(link);
+  let imgLink = "uploads/" + req.file.filename;
+  photoLinks.push({name, tag, img: imgLink});
+  res.send(html);
 });
 
 app.listen(port, () => {

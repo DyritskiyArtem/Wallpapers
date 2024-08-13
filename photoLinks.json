@@ -1,12 +1,52 @@
 [
-    "ahmadreza-sajadi-10140-edit.jpg",
-    "benjamin-voros-250200.jpg",
-    "ferdinand-stohr-149422.jpg",
-    "galen-crout-175291.jpg",
-    "jad-limcaco-183877.jpg",
-    "jake-hills-36605.jpg",
-    "jared-evans-119758.jpg",
-    "jasper-van-der-meij-97274-edit.jpg",
-    "kait-herzog-8242.jpg",
-    "kate-hazen-fractal-mountains.png"
+    {
+        "name": "Starfall",
+        "img": "ahmadreza-sajadi-10140-edit.jpg",
+        "tag": ["starfall", "nature", "stars", "night"]
+    },
+    {
+        "name": "Winter Mountains",
+        "img": "benjamin-voros-250200.jpg",
+        "tag": ["winter mountains", "nature", "mountains", "day", "snow"]
+    },
+    {
+        "name": "Glass",
+        "img": "ferdinand-stohr-149422.jpg",
+        "tag": ["glass", "multicolored", "beautiful", "day"]
+    },
+    {
+        "name": "Sputnik",
+        "img": "galen-crout-175291.jpg",
+        "tag": ["sputnik", "gray", "large", "dark"]
+    },
+    {
+        "name": "Mountains",
+        "img": "jad-limcaco-183877.jpg",
+        "tag": ["mountains", "canyon", "day", "mysterious"]
+    },
+    {
+        "name": "Phases of the moon",
+        "img": "jake-hills-36605.jpg",
+        "tag": ["moon phases", "moon", "night"]
+    },
+    {
+        "name": "Stars and Desert",
+        "img": "jared-evans-119758.jpg",
+        "tag": ["stars", "desert", "night"]
+    },
+    {
+        "name": "Canyon",
+        "img": "jasper-van-der-meij-97274-edit.jpg",
+        "tag": ["canyon", "desert", "day"]
+    },
+    {
+        "name": "Welcome to Colorful Colorado",
+        "img": "kait-herzog-8242.jpg",
+        "tag": ["welcome to colorful colorado", "desert", "colorado", "day"]
+    },
+    {
+        "name": "Desktop Wallpaper",
+        "img": "kate-hazen-fractal-mountains.png",
+        "tag": ["wallpaper for desktop", "wallpaper", "gray"]
+    }
 ]
